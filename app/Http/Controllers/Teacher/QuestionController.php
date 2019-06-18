@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Teacher;
 
-use App\Models\Course;
-use App\Models\User;
+use App\Models\Question;
+use App\Models\Thematic;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
-class CourseController extends Controller
+class QuestionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +17,6 @@ class CourseController extends Controller
     public function index()
     {
         //
-        $courses = User::findOrFail(auth()->id())->courses;
-        $data = [
-            'courses' => $courses,
-        ];
-        return view('teacher.course.index', $data);
     }
 
     /**
@@ -33,23 +27,25 @@ class CourseController extends Controller
     public function create()
     {
         //
+        return view('teacher.question.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         //
+        dd(1);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -60,7 +56,7 @@ class CourseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -71,8 +67,8 @@ class CourseController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -83,11 +79,28 @@ class CourseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
+    }
+
+    public function makeTest(Request $request)
+    {
+        $id = $request->id;
+
+        $all = Thematic::findOrFail(12)->questions;
+        dd($all);
+        $easy = Thematic::findOrFail(12)->questions->where('level', '==', Question::EASY);
+        $normal = Thematic::findOrFail(12)->questions->where('level', '==', Question::NORMAL);
+        $hard = Thematic::findOrFail(12)->questions->where('level', '==', Question::HARD);
+        $data = [
+            'easy' => $easy,
+          'normal' => $normal,
+            'hard' => $hard,
+        ];
+        dd($data);
     }
 }
