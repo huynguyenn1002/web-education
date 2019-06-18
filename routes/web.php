@@ -18,3 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::middleware(['teacher'])->namespace('teacher')->as('teacher.')->group(function (){
+    Route::resource('/course', 'CourseController');
+    Route::resource('/thematic', 'ThematicController');
+    Route::resource('/question', 'QuestionController');
+    Route::get('/test', 'QuestionController@makeTest')->name('teacher.question.test');
+});
