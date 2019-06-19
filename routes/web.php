@@ -13,13 +13,13 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::middleware(['teacher'])->namespace('teacher')->as('teacher.')->group(function (){
+Route::middleware(['auth','teacher'])->namespace('teacher')->as('teacher.')->group(function (){
     Route::resource('/course', 'CourseController');
     Route::resource('/thematic', 'ThematicController');
     Route::resource('/question', 'QuestionController');
