@@ -5,7 +5,7 @@
             @csrf
             <div class="form-group">
                 <label for="thematic">Chuyên đề:</label>
-                <select name="thematicId" id="thematic">
+                <select name="thematicId" id="thematic" class="form-control">
                     <option value="">Choose...</option>
                     @foreach(auth()->user()->courses as $course)
                         @foreach($course->thematics as $thematic)
@@ -16,7 +16,7 @@
             </div>
             <div class="form-group">
                 <label for="level">Độ khó: </label>
-                <select name="level" id="level">
+                <select name="level" id="level" class="form-control">
                     <option value="">Choose...</option>
                     <option value="{{ \App\Models\Question::EASY }}">Dễ</option>
                     <option value="{{ \App\Models\Question::NORMAL }}">Vừa</option>
@@ -25,23 +25,23 @@
             </div>
             <div class="form-group">
                 <label for="question">Câu hỏi: </label>
-                <input type="text" name="question" class="form-control">
+                <textarea name="question" id="question" cols="10" rows="10" class="form-control rounded-0" required></textarea>
             </div>
             <div class="form-group">
                 <label for="answer-A">Đáp án A: </label>
-                <input type="text" name="answerA" class="form-control">
+                <input type="text" name="answerA" class="form-control"required>
             </div>
             <div class="form-group">
                 <label for="answer-B">Đáp án B: </label>
-                <input type="text" name="answerB" class="form-control">
+                <input type="text" name="answerB" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="answer-C">Đáp án C: </label>
-                <input type="text" name="answerC" class="form-control">
+                <input type="text" name="answerC" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="answer-D">Đáp án D: </label>
-                <input type="text" name="answerD" class="form-control">
+                <input type="text" name="answerD" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="answer_correct">Đáp án: </label>
