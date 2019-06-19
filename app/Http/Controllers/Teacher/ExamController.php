@@ -60,6 +60,7 @@ class ExamController extends Controller
             throw new Exception($e->getMessage());
         }
         return route('teacher.thematic.index');
+
     }
 
     /**
