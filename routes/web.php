@@ -23,5 +23,7 @@ Route::middleware(['auth','teacher'])->namespace('teacher')->as('teacher.')->gro
     Route::resource('/course', 'CourseController');
     Route::resource('/thematic', 'ThematicController');
     Route::resource('/question', 'QuestionController');
-    Route::get('/test', 'QuestionController@makeTest')->name('teacher.question.test');
+    Route::get('/test/create', 'QuestionController@showForm')->name('question.form.create');
+    Route::post('/test', 'QuestionController@makeTest')->name('question.form.store');
+    Route::resource('/exam', 'ExamController');
 });

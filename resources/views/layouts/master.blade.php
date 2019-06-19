@@ -40,7 +40,6 @@
 </header>
 <!-- header section end-->
 
-
 <!-- Header section  -->
 <nav class="nav-section">
     <div class="container">
