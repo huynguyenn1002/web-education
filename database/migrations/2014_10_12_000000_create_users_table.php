@@ -21,10 +21,10 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->date('DOB')->nullable();
             $table->string('phone')->nullable();
-            $table->integer('academic')->default(\App\User::ORTHER);
+            $table->integer('academic')->default(\App\Models\User::ORTHER);
             $table->string('address')->nullable();
             $table->string('avatar')->nullable();
-            $table->integer('isTeacher')->default(\App\User::FALSE);
+            $table->integer('isTeacher')->default(\App\Models\User::FALSE);
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
