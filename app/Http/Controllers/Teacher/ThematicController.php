@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Teacher;
 
+use App\Models\Thematic;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -37,7 +38,14 @@ class ThematicController extends Controller
     public function store(Request $request)
     {
         //
-        dd(1);
+        $thematic = new Thematic();
+        $thematic->fill([
+            'description' => $request->description,
+            'name' => $request->name,
+            'course_id' => $request->courseId
+        ]);
+        $thematic->save();
+        return redirect()->route('teacher.thematic.create');
     }
 
     /**

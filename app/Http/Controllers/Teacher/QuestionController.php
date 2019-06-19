@@ -39,7 +39,19 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         //
-        dd(1);
+        $question = new Question();
+        $question->fill([
+            'level' => $request->level,
+            'thematic_id' => $request->thematicId,
+            'answer_A' => $request->answerA,
+            'answer_B' => $request->answerB,
+            'answer_C' => $request->answerC,
+            'answer_D' => $request->answerD,
+            'answer_correct' => $request->answerCorrect,
+            'question' => $request->question,
+        ]);
+        $question->save();
+        return redirect()->route('teacher.question.create');
     }
 
     /**

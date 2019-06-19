@@ -59,7 +59,8 @@ class ExamController extends Controller
             DB::rollBack();
             throw new Exception($e->getMessage());
         }
-        dd(1);
+        return route('teacher.thematic.index');
+
     }
 
     /**
