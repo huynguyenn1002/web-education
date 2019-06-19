@@ -5,14 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Thematic extends Model
+class Exam extends Model
 {
     //
     use SoftDeletes;
+
     protected $fillable = [
         'name',
-        'description',
-        'course_id',
+        'thematic_id',
+        'question_id',
+        'answer_correct',
     ];
 
     protected $dates = [
@@ -21,18 +23,13 @@ class Thematic extends Model
         'deleted_at',
     ];
 
-    public function course()
+    public function thematic()
     {
-        return $this->belongsTo(Course::class);
+        return $this->belongsTo(Thematic::class);
     }
 
-    public function questions()
+    public function question()
     {
-        return $this->hasMany(Question::class);
-    }
-
-    public function exam()
-    {
-        return $this->hasOne(Exam::class);
+        return $this->belongsTo(Question::class);
     }
 }

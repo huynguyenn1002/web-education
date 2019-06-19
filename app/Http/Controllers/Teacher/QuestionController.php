@@ -87,20 +87,35 @@ class QuestionController extends Controller
         //
     }
 
+    public function showForm()
+    {
+        return view('teacher.question.form');
+    }
+
     public function makeTest(Request $request)
     {
-        $id = $request->id;
-
-        $all = Thematic::findOrFail(12)->questions;
-        dd($all);
-        $easy = Thematic::findOrFail(12)->questions->where('level', '==', Question::EASY);
-        $normal = Thematic::findOrFail(12)->questions->where('level', '==', Question::NORMAL);
-        $hard = Thematic::findOrFail(12)->questions->where('level', '==', Question::HARD);
+        $count = 0;
+        $countEasy = $request->countEasy;
+        $countNormal = $request->countNormal;
+        $countHard = $request->countHard;
+        $thematicId = $request->thematicId;
+        $questions = [];
+        $easy = Question::inRandomOrder()->where('thematic_id', '=', $thematicId)->where('level', '=', Question::EASY)->take($countEasy)->get();
+        $normal = Question::inRandomOrder()->where('thematic_id', '=', $thematicId)->where('level', '=', Question::NORMAL)->take($countNormal)->get();
+        $hard = Question::inRandomOrder()->where('thematic_id', '=', $thematicId)->where('level', '=', Question::HARD)->take($countHard)->get();
+        foreach ($easy as $value) {
+            $questions[$count++] = $value;
+        }
+        foreach ($normal as $value) {
+            $questions[$count++] = $value;
+        }
+        foreach ($hard as $value) {
+            $questions[$count++] = $value;
+        }
         $data = [
-            'easy' => $easy,
-          'normal' => $normal,
-            'hard' => $hard,
+            'questions' => $questions,
+            'thematicId' => $thematicId,
         ];
-        dd($data);
+        return view('teacher.question.exam', $data);
     }
 }

@@ -1,5 +1,5 @@
 @include('layouts.header')
-@yield('script')
+    @yield('script')
 
     <div class="content">
         @yield('content')

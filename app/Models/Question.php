@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\Request;
 
 class Question extends Model
 {
     //
+    use SoftDeletes;
     const EASY = 1;
     const NORMAL = 2;
     const HARD = 3;
@@ -36,5 +39,10 @@ class Question extends Model
     public function thematic()
     {
         return $this->belongsTo(Thematic::class);
+    }
+
+    public function exam()
+    {
+        return $this->hasOne(Exam::class);
     }
 }
